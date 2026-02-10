@@ -1,0 +1,75 @@
+# ============================================
+# CORE AI & LLM LIBRARIES
+# ============================================
+openai
+anthropic
+
+# ============================================
+# LANGCHAIN ECOSYSTEM
+# ============================================
+langchain
+langchain-openai
+langchain-anthropic
+langchain-community
+langgraph
+langchain-core
+
+# ============================================
+# VECTOR DATABASE
+# ============================================
+qdrant-client
+sentence-transformers
+
+# ============================================
+# MACHINE LEARNING & DATA SCIENCE
+# ============================================
+# Core ML
+scikit-learn
+xgboost
+pandas
+numpy
+
+# Deep Learning
+torch
+# tensorflow  # Uncomment if needed
+
+# ============================================
+# WEB & API
+# ============================================
+fastapi
+uvicorn
+pydantic
+python-multipart
+requests
+
+# ============================================
+# DATABASE
+# ============================================
+psycopg2-binary
+redis
+sqlalchemy
+
+# ============================================
+# DOCUMENT PROCESSING
+# ============================================
+pypdf
+python-docx
+openpyxl
+python-pptx
+
+# ============================================
+# UTILITIES
+# ============================================
+python-dotenv
+tenacity
+tiktoken
+tqdm
+
+# ============================================
+# DEVELOPMENT & TESTING
+# ============================================
+pytest
+black
+flake8
+ipython
+jupyter
