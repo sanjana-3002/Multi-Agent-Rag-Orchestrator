@@ -1,0 +1,56 @@
+# Day 1: Embeddings & Semantic Search
+
+## What I Learned
+
+### 1. Embeddings (The "Aha!" moment)
+- **What they are:** Dense vectors (lists of numbers) that represent text
+- **Why they matter:** Capture MEANING, not just words
+- **Connection to my ML background:** Like feature vectors in sklearn, but learned by massive neural networks
+
+### 2. How Embeddings Work (My understanding)
+```
+Text: "revenue grew 30%"
+  ↓ (tokenization)
+["revenue", "grew", "30%"]
+  ↓ (embedding model - huge transformer)
+[0.023, -0.145, 0.234, ..., 0.089]  # 1536 numbers
+```
+
+Similar meanings → similar vectors (measured by cosine similarity)
+
+### 3. Semantic Search (What I built today)
+1. Convert all documents to embeddings (one-time "indexing")
+2. Convert user query to embedding
+3. Find documents with most similar embeddings
+4. Return best matches
+
+**This is the core of RAG!**
+
+### 4. Comparison to What I Know
+
+| Concept | Traditional ML (I know) | LLM/Embeddings (Learning) |
+|---------|------------------------|---------------------------|
+| Input | Structured data (CSV) | Text |
+| Features | Manual engineering | Automatic from model |
+| Similarity | Euclidean, correlation | Cosine similarity |
+| Use case | Classification, regression | Search, generation |
+
+### Questions I Still Have
+- [ ] How does the embedding model actually work internally? (transformers, attention)
+- [ ] What's the difference between embedding models? (ada-002 vs text-embedding-3)
+- [ ] How do I choose the right similarity threshold?
+
+### Tomorrow's Preview
+- Vector databases (Qdrant) - how to scale beyond 6 documents
+- Chunking strategies - what if documents are huge?
+- Building a real RAG pipeline
+
+### Code I Wrote Today
+- `learning/day1_embeddings.py` - Understanding embeddings
+- `learning/day1_semantic_search.py` - Built mini search engine
+
+### Time Spent
+- Theory: 1.5 hours
+- Coding: 2 hours  
+- Debugging/Experiments: 1 hour
+- Total: 4.5 hours ✓
