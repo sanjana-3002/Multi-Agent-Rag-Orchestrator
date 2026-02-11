@@ -1,0 +1,139 @@
+# Day 2: Vector Databases & Caching
+
+## What I Learned Today
+
+### 1. Vector Databases 
+
+**The Problem:**
+- Day 1: Searching through list of embeddings is SLOW
+- For 1,000,000 documents, must check all 1 million every search!
+
+**The Solution: Qdrant (Vector Database)**
+- Builds a graph structure (HNSW algorithm)
+- Can find similar vectors in O(log n) time instead of O(n)
+- Like using a phone book index instead of reading every page
+
+**Key Concept:**
+```
+Regular list:      Check 1,000,000 items = SLOW
+Vector database:   Check ~20 items via graph = FAST
+```
+
+### 2. Collections vs Points
+
+**Collection** = Like a table in SQL
+- Stores vectors of specific size (1536 for text-embedding-3-small)
+- Has distance metric (COSINE for text)
+
+**Point** = Like a row in SQL
+- id: Unique identifier
+- vector: The embedding (1536 numbers)
+- payload: Extra data (text, metadata, anything!)
+
+**Code Pattern:**
+```python
+# Create collection (once)
+qdrant.create_collection(name="docs", vectors_config=...)
+
+# Add points (multiple times)
+qdrant.upsert(collection_name="docs", points=[...])
+
+# Search (many times)
+results = qdrant.search(query_vector=..., limit=5)
+```
+
+### 3. Caching Strategy (Money Saver!)
+
+**Why Cache?**
+- OpenAI charges $0.02 per 1M tokens for embeddings
+- If you embed "revenue growth" 100 times = wasted $0.002
+- With cache: Embed once, reuse forever = save 99%!
+
+**My Cache Stats Today:**
+- Documents embedded: 6
+- API calls: 6 (first time)
+- Cache hits: 3 (when I tested same queries)
+- Money saved: $0.0003 (will add up!)
+
+### 4. Metadata is Powerful!
+
+**What I stored:**
+```python
+metadata = {
+    "type": "project",
+    "company": "Camping World",
+    "skills": ["Python", "Clustering"],
+    "year": 2025
+}
+```
+
+**Why it matters:**
+- Can filter searches: "Only show Camping World projects"
+- Can facet results: "Group by skill"
+- Can boost recent items: "Weight 2025 higher than 2024"
+
+Tomorrow I'll learn how to filter by metadata!
+
+### 5. Connection to What I Know
+
+**SQL:**
+```sql
+SELECT * FROM projects 
+WHERE text LIKE '%machine learning%'
+LIMIT 5;
+```
+
+**Vector Search (similar but better):**
+```python
+results = qdrant.search(
+    query_vector=embedding("machine learning projects"),
+    limit=5
+)
+```
+
+Key difference: SQL finds exact words, Vector search finds MEANING
+
+## Code I Wrote Today
+
+- ✅ `learning/day2_qdrant_setup.py` - Created vector database
+- ✅ `utils/embedding_cache.py` - Built caching system
+- ✅ `learning/day2_index_documents.py` - Indexed my projects
+
+## Wins 🎉
+
+- Vector database working!
+- Caching saves money (already saved $0.0003)
+- Indexed 6 real examples from my work
+- Search works great - finds relevant projects
+
+## Struggles 😅
+
+- HNSW algorithm details still fuzzy 
+- Forgetting to activate venv at first
+- One typo in collection name took 10 min to debug
+
+## Questions for Tomorrow
+
+- How do I filter by metadata while searching?
+- What's the difference between COSINE vs EUCLIDEAN distance?
+- How many documents before I need hosted Qdrant?
+
+## Tomorrow's Goals (Day 3)
+
+- Learn hybrid search (semantic + keyword)
+- Understand metadata filtering
+- Build reranking system
+
+## Time Tracking
+
+- Learning: 1.5 hours ✓
+- Coding: 2.5 hours ✓
+- Reflection: 30 min ✓
+- **Total: 4.5 hours** ✓
+
+## Cost Tracking
+
+- Embeddings: $0.05 (6 documents + 3 queries = ~9 API calls)
+- Qdrant: $0 (in-memory)
+- **Total Day 2: $0.05** ✓
+- **Week 1 so far: $0.55** ($0.50 Day 1 + $0.05 Day 2)
