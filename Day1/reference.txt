@@ -2,7 +2,7 @@
 
 ## What I Learned
 
-### 1. Embeddings (The "Aha!" moment)
+### 1. Embeddings 
 - **What they are:** Dense vectors (lists of numbers) that represent text
 - **Why they matter:** Capture MEANING, not just words
 - **Connection to my ML background:** Like feature vectors in sklearn, but learned by massive neural networks
@@ -53,4 +53,4 @@ Similar meanings → similar vectors (measured by cosine similarity)
 - Theory: 1.5 hours
 - Coding: 2 hours  
 - Debugging/Experiments: 1 hour
-- Total: 4.5 hours ✓
+- Total: 4.5 hours 
