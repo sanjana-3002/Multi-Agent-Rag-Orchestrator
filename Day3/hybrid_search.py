@@ -1,5 +1,7 @@
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
+from Day3.bm25_search import BM25Searcher
+from Day2.embedding_cache import EmbeddingCache
 from bm25_search import BM25Searcher
 import uuid
 import numpy as np
