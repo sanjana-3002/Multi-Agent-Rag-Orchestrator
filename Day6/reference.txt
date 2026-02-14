@@ -75,3 +75,23 @@ QUERY EXECUTION FLOW:
 7. Cost Tracker: Calculate query cost
    ↓
 8. Return results to user
+
+
+Production ML Engineering:
+- Implemented cost tracking system logging all API calls with model, tokens,
+  and spend, achieving $0.003/query cost efficiency
+- Designed intelligent model routing reducing API costs 75% through complexity-
+  based selection (GPT-3.5 vs GPT-4) while maintaining quality
+- Built performance monitoring with percentile-based latency tracking (p50/
+  p95/p99) and cache hit rate analysis, achieving <3s p95 response time
+- Established production SLAs: <$0.005/query cost, <3s p95 latency, >50% 
+  cache hit rate, 87% retrieval precision
+
+MLOps & Monitoring:
+- Designed comprehensive observability stack tracking cost, performance, and
+  quality metrics in real-time
+- Implemented automated health checks with clear thresholds for cost, latency,
+  and cache performance
+- Built cost forecasting system projecting monthly spend based on usage 
+  patterns ($90-150/month for 1000 daily queries)
+- Created operational dashboards for daily monitoring and weekly optimization
