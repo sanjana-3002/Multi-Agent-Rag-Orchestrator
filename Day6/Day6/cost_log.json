@@ -1,0 +1,104 @@
+[
+  {
+    "timestamp": "2026-02-14T13:43:38.629773",
+    "type": "embedding",
+    "model": "text-embedding-3-small",
+    "tokens": 1000,
+    "cost": 2e-05
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.630001",
+    "type": "embedding",
+    "model": "text-embedding-3-small",
+    "tokens": 1000,
+    "cost": 2e-05
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.630107",
+    "type": "embedding",
+    "model": "text-embedding-3-small",
+    "tokens": 1000,
+    "cost": 2e-05
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.630183",
+    "type": "embedding",
+    "model": "text-embedding-3-small",
+    "tokens": 1000,
+    "cost": 2e-05
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.630413",
+    "type": "embedding",
+    "model": "text-embedding-3-small",
+    "tokens": 1000,
+    "cost": 2e-05
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.630588",
+    "type": "embedding",
+    "model": "text-embedding-3-small",
+    "tokens": 1000,
+    "cost": 2e-05
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.630757",
+    "type": "embedding",
+    "model": "text-embedding-3-small",
+    "tokens": 1000,
+    "cost": 2e-05
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.630929",
+    "type": "embedding",
+    "model": "text-embedding-3-small",
+    "tokens": 1000,
+    "cost": 2e-05
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.631009",
+    "type": "embedding",
+    "model": "text-embedding-3-small",
+    "tokens": 1000,
+    "cost": 2e-05
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.631183",
+    "type": "embedding",
+    "model": "text-embedding-3-small",
+    "tokens": 1000,
+    "cost": 2e-05
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.631377",
+    "type": "llm",
+    "model": "gpt-3.5-turbo",
+    "input_tokens": 500,
+    "output_tokens": 100,
+    "cost": 0.0004
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.631567",
+    "type": "llm",
+    "model": "gpt-3.5-turbo",
+    "input_tokens": 500,
+    "output_tokens": 100,
+    "cost": 0.0004
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.631666",
+    "type": "llm",
+    "model": "gpt-3.5-turbo",
+    "input_tokens": 500,
+    "output_tokens": 100,
+    "cost": 0.0004
+  },
+  {
+    "timestamp": "2026-02-14T13:43:38.631859",
+    "type": "llm",
+    "model": "gpt-4-turbo",
+    "input_tokens": 500,
+    "output_tokens": 100,
+    "cost": 0.008
+  }
+]
