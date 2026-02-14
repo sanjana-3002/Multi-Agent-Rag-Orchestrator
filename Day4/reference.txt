@@ -92,8 +92,6 @@ Results
 - Can drill down to specific time periods/platforms
 - Faster search (filtering reduces search space)
 
----
-
 ## Cost Tracking
 
 - Query optimization: $0.50 (50 test queries)
