@@ -1,10 +1,5 @@
 # Day 4: Query Optimization & Metadata Filtering
 
-**Date:** [Today's date]  
-**Time:** 4 hours  
-**Cost:** $1.00
-
----
 
 ## What I Learned
 
