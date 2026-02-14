@@ -58,5 +58,3 @@ OPTIMIZATION STRATEGIES:
 3. Use async/parallel processing for multi-query
 4. Set timeouts (fail fast on slow queries)
 
-CODE USAGE:
-```python
