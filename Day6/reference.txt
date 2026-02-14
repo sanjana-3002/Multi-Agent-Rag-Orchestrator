@@ -1,0 +1,62 @@
+KEY LEARNING:
+Model routing is the EASIEST way to cut costs by 75% without sacrificing 
+quality. Most AI projects waste money by always using GPT-4.
+
+================================================================================
+FILE 3: performance_monitor.py - System Health Tracking
+================================================================================
+
+WHAT IT DOES:
+Tracks query latency, cache performance, and system health in real-time.
+Provides percentile-based latency metrics (p50, p95, p99).
+
+KEY METRICS:
+
+1. LATENCY PERCENTILES
+   - p50 (median): 50% of queries faster than this
+   - p95: 95% of queries faster than this (key SLA metric)
+   - p99: 99% of queries faster than this (tail latency)
+   - Min/Max/Mean: Additional context
+
+   Why percentiles matter:
+   - Mean hides outliers (one 30s query makes mean look bad)
+   - p95 shows "typical worst case" user experience
+   - p99 catches truly bad experiences
+
+2. CACHE HIT RATE
+   - % of queries served from cache (no API call needed)
+   - Target: 50%+ for production systems
+   - Higher = cheaper + faster
+
+3. THROUGHPUT
+   - Queries processed per second
+   - Tracks system capacity
+
+TYPICAL PERFORMANCE (CampaignBrain):
+
+Development (small dataset):
+- p50: 800ms (fast)
+- p95: 2000ms (good)
+- p99: 3000ms (acceptable)
+- Cache hit rate: 30% (room for improvement)
+
+Production targets:
+- p50: <1000ms (users don't notice)
+- p95: <3000ms (SLA target)
+- p99: <5000ms (acceptable)
+- Cache hit rate: 50%+ (cost savings)
+
+WHAT CAUSES SLOW QUERIES:
+1. Cold start (first query, no cache): 2-3s
+2. Complex queries (GPT-4 reasoning): 3-5s
+3. Network latency to OpenAI: +500ms
+4. Large result sets (>20 docs): +200ms
+
+OPTIMIZATION STRATEGIES:
+1. Warm up cache on deploy (pre-embed common queries)
+2. Implement response caching (Redis)
+3. Use async/parallel processing for multi-query
+4. Set timeouts (fail fast on slow queries)
+
+CODE USAGE:
+```python
