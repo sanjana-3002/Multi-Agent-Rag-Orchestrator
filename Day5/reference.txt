@@ -1,0 +1,79 @@
+================================================================================
+DAY 5: EVALUATION FRAMEWORK - COMPLETE REFERENCE
+CampaignBrain Project - Week 1 Completion
+================================================================================
+
+Date: February 14, 2026
+Time Spent: 4-5 hours
+Cost: ~$1-2 (LLM-as-judge API calls)
+Status: ✅ COMPLETE
+
+================================================================================
+WHAT WE BUILT TODAY
+================================================================================
+
+Day 5 completes Week 1 by adding the MOST IMPORTANT feature that 95% of AI 
+projects skip: comprehensive evaluation.
+
+Three Core Components:
+1. Evaluation Metrics System (metrics.py)
+2. Test Case Dataset (test_cases.json)
+3. Automated Evaluator (evaluator.py)
+
+================================================================================
+FILE 1: metrics.py - Evaluation Metrics Calculator
+================================================================================
+
+PURPOSE:
+Calculate standard information retrieval metrics to measure search quality
+objectively (no human judgment needed for basic metrics).
+
+METRICS IMPLEMENTED:
+
+1. Precision@K
+   - Definition: What % of retrieved results are actually relevant?
+   - Formula: (# relevant docs in top K) / K
+   - Example: Retrieved 5 docs, 3 are relevant → Precision@5 = 3/5 = 0.60
+   - Interpretation: 60% of what we showed the user was useful
+   - Good target: 70%+ (82%+ is excellent)
+
+2. Recall@K
+   - Definition: What % of all relevant docs did we find in top K?
+   - Formula: (# relevant docs in top K) / (total # relevant docs)
+   - Example: 5 relevant docs exist, found 3 in top 5 → Recall@5 = 3/5 = 0.60
+   - Interpretation: We found 60% of everything relevant
+   - Good target: 70%+
+
+3. Mean Reciprocal Rank (MRR)
+   - Definition: How quickly do we find the FIRST relevant result?
+   - Formula: 1 / (position of first relevant doc)
+   - Example: First relevant doc at position 2 → MRR = 1/2 = 0.50
+   - Interpretation: On average, first good result is at position 2
+   - Good target: 0.8+ (excellent: 0.9+)
+   - Range: 0.0 (never found) to 1.0 (first result always relevant)
+
+4. Hit Rate@K
+   - Definition: Did we find AT LEAST ONE relevant doc in top K?
+   - Returns: 1.0 (yes) or 0.0 (no)
+   - Example: Found 1 relevant doc in top 5 → Hit Rate@5 = 1.0
+   - Good target: 90%+
+
+WHY THESE METRICS MATTER:
+
+For CampaignBrain (marketing agency use case):
+- Precision@3 = 0.82 means 82% of top 3 results are relevant
+  → Users find what they need in first 3 results
+  → Saves time, increases trust in system
+  
+- MRR = 0.9 means first relevant result is at position 1.1 on average
+  → Almost always get it right on first try
+  → Professional feel, production-ready quality
+
+KEY LEARNING:
+Precision and Recall are a tradeoff:
+- High precision, low recall = Very accurate but misses some results
+- Low precision, high recall = Finds everything but lots of junk
+- Goal: Balance both (70%+ on each)
+
+CODE STRUCTURE:
+```python
