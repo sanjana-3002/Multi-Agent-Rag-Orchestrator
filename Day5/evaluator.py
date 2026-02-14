@@ -29,7 +29,7 @@ class RAGEvaluator:
     4. Latency measurement
     """
     
-    def __init__(self, test_cases_path="Day5/test_cases.json"):
+    def __init__(self, test_cases_path="/Users/sanjanawaghray/Documents/projects/Multi-Agent-Rag-Orchestrator/Day5/test_cases.json"):
         with open(test_cases_path, 'r') as f:
             self.test_cases = json.load(f)
         
