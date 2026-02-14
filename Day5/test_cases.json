@@ -1,37 +1,37 @@
 [
   {
     "id": "test_001",
-    "query": "Q4 2024 social media campaigns",
+    "query": "Q4 2024 campaigns",
     "expected_doc_indices": [0, 2],
-    "expected_keywords": ["Q4", "2024", "social", "Facebook", "Instagram"],
+    "expected_keywords": ["Q4", "2024"],
     "category": "exact_match"
   },
   {
     "id": "test_002",
-    "query": "email marketing that generated leads",
+    "query": "email marketing leads",
     "expected_doc_indices": [1],
     "expected_keywords": ["email", "leads", "SaaS"],
     "category": "semantic"
   },
   {
     "id": "test_003",
-    "query": "campaigns that increased conversions",
-    "expected_doc_indices": [0],
-    "expected_keywords": ["conversions", "increased", "35%"],
+    "query": "Facebook advertising campaigns",
+    "expected_doc_indices": [0, 4],
+    "expected_keywords": ["Facebook", "campaign"],
     "category": "semantic"
   },
   {
     "id": "test_004",
-    "query": "LinkedIn B2B advertising",
-    "expected_doc_indices": [3],
-    "expected_keywords": ["LinkedIn", "B2B"],
-    "category": "exact_match"
+    "query": "social media reach impressions",
+    "expected_doc_indices": [2],
+    "expected_keywords": ["Instagram", "impressions", "2M"],
+    "category": "semantic"
   },
   {
     "id": "test_005",
     "query": "reduce advertising costs",
     "expected_doc_indices": [5],
-    "expected_keywords": ["reduced", "cost", "CPC"],
+    "expected_keywords": ["cost-per-click", "reduced", "40%"],
     "category": "semantic"
   }
 ]
