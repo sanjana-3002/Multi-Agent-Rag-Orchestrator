@@ -1,6 +1,4 @@
 # Day 4: Query Optimization & Metadata Filtering
-
-
 ## What I Learned
 
 ### 1. Query Optimization
@@ -63,8 +61,6 @@ Metadata filtering (Qdrant)
   ↓
 Results
 ```
-
----
 
 ## Code Structure
 
