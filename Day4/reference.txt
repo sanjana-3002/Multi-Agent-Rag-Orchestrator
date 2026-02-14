@@ -1,0 +1,116 @@
+# Day 4: Query Optimization & Metadata Filtering
+
+**Date:** [Today's date]  
+**Time:** 4 hours  
+**Cost:** $1.00
+
+---
+
+## What I Learned
+
+### 1. Query Optimization
+
+**Three techniques:**
+
+1. **Query Expansion**: Add related terms
+   - Input: "revenue"
+   - Output: "revenue sales income earnings"
+   - Cost: $0.001 per query (GPT-3.5)
+
+2. **Query Rewriting**: Make vague queries specific
+   - Input: "revenue?"
+   - Output: "What were revenue results for campaigns?"
+   - Cost: $0.001 per query
+
+3. **Multi-Query**: Generate variations
+   - Input: "social media"
+   - Output: ["social media campaigns", "Facebook Instagram ads", "social network marketing"]
+   - Cost: $0.002 per query (slightly longer)
+
+**When to use:**
+- Expansion: User query is too narrow
+- Rewriting: User query is vague/unclear
+- Multi-query: Want comprehensive results
+
+### 2. Metadata Filtering
+
+**How it works:**
+- Store metadata with each document (quarter, year, platform)
+- Filter BEFORE vector search (more efficient)
+- Combine filters with AND logic
+
+**Example:**
+```python
+# Only Q4 2024 Facebook campaigns
+filter = MetadataFilter.combine_filters(
+    quarter="Q4",
+    year=2024,
+    platform="Facebook"
+)
+```
+
+**Benefits:**
+- Faster (search smaller subset)
+- More relevant (exact requirements)
+- Free (no API cost for filtering)
+
+### 3. Smart Search Pipeline
+
+**Full flow:**
+```
+User query
+  ↓
+Query optimization (GPT-3.5)
+  ↓
+Hybrid search (semantic + keyword)
+  ↓
+Metadata filtering (Qdrant)
+  ↓
+Results
+```
+
+---
+
+## Code Structure
+
+### Files Created:
+- `knowledge/query_optimizer.py` - Query improvements
+- `knowledge/metadata_filter.py` - Filtering logic
+- `knowledge/smart_search.py` - Complete system
+
+### Key Classes:
+1. `QueryOptimizer` - 3 optimization methods
+2. `MetadataFilter` - Filter builders
+3. `SmartSearcher` - Combines everything
+
+---
+
+## For CampaignBrain
+
+**Use cases:**
+1. "Show me Q4 social media campaigns" → Filtered search
+2. "revenue" → Expand to "revenue sales conversions ROI"
+3. "best campaigns?" → Rewrite to "What were the best performing campaigns?"
+
+**Value:**
+- Users get better results from vague queries
+- Can drill down to specific time periods/platforms
+- Faster search (filtering reduces search space)
+
+---
+
+## Cost Tracking
+
+- Query optimization: $0.50 (50 test queries)
+- Embedding: $0.50 (cached most)
+- Total Day 4: $1.00
+- **Week 1 Total: $1.60** / $3-5 ✓
+
+---
+
+## Tomorrow (Day 5)
+
+- Build evaluation framework
+- Create test dataset (50+ cases)
+- Measure precision, recall, MRR
+- Week 1 wrap-up!
