@@ -78,8 +78,6 @@ Results
 2. `MetadataFilter` - Filter builders
 3. `SmartSearcher` - Combines everything
 
----
-
 ## For CampaignBrain
 
 **Use cases:**
