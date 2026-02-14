@@ -7,6 +7,7 @@ COST: ~$1 (LLM-as-judge for quality)
 import json
 import sys
 from pathlib import Path
+from typing import Dict  # ← ADD THIS LINE
 sys.path.append(str(Path(__file__).parent.parent))
 
 from Day4.smart_search import SmartSearcher
