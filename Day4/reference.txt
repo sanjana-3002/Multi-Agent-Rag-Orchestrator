@@ -93,7 +93,6 @@ Results
 - Faster search (filtering reduces search space)
 
 ## Cost Tracking
-
 - Query optimization: $0.50 (50 test queries)
 - Embedding: $0.50 (cached most)
 - Total Day 4: $1.00
