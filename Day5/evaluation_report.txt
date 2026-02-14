@@ -5,11 +5,11 @@ EVALUATION REPORT - CampaignBrain Search System
 
 RETRIEVAL QUALITY:
 ------------------------------------------------------------
-Precision@3:  0.400  (82%+ is good)
+Precision@3:  0.467  (82%+ is good)
 Recall@3:     1.000  (70%+ is good)
 MRR:          1.000  (0.8+ is excellent)
 
-Precision@5:  0.240
+Precision@5:  0.280
 Recall@5:     1.000
 
 ANSWER QUALITY (LLM-as-Judge):
@@ -22,6 +22,6 @@ INTERPRETATION:
 ⚠️  NEEDS WORK: Search quality below target
 
 For CampaignBrain use case:
-- Precision@3 of 40.0% means 40% of top results are relevant
+- Precision@3 of 46.7% means 47% of top results are relevant
 - This translates to users finding what they need quickly
 - Target: 82%+ for production launch
