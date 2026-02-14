@@ -58,3 +58,20 @@ OPTIMIZATION STRATEGIES:
 3. Use async/parallel processing for multi-query
 4. Set timeouts (fail fast on slow queries)
 
+QUERY EXECUTION FLOW:
+
+1. User query arrives
+   ↓
+2. Performance Monitor: Start timer
+   ↓
+3. Model Router: Choose GPT-3.5 or GPT-4
+   ↓
+4. Cost Tracker: Log model + tokens
+   ↓
+5. Execute search
+   ↓
+6. Performance Monitor: Log latency + cache hit
+   ↓
+7. Cost Tracker: Calculate query cost
+   ↓
+8. Return results to user
