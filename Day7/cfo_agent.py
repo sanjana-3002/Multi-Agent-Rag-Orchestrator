@@ -7,13 +7,21 @@ COST: ~$0.50 per query (GPT-3.5)
 import json
 import sys
 from pathlib import Path
+from typing import Dict
+
+# Fix the path
 sys.path.append(str(Path(__file__).parent.parent))
 
 from openai import OpenAI
 from dotenv import load_dotenv
+
+# CHANGE THIS LINE:
+# OLD: from Day8.tools import TOOL_REGISTRY, FinancialTools
+# NEW: Import directly since we're in same folder
 from tools import TOOL_REGISTRY, FinancialTools
 
 load_dotenv()
+
 
 
 class CFOAgent:
