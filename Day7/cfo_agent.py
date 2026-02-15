@@ -11,7 +11,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from openai import OpenAI
 from dotenv import load_dotenv
-from Day8.tools import TOOL_REGISTRY, FinancialTools
+from tools import TOOL_REGISTRY, FinancialTools
 
 load_dotenv()
 
