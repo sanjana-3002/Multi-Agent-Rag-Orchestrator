@@ -127,3 +127,5 @@ if __name__ == "__main__":
     print("\n" + "="*60)
     print("✅ ALL TESTS COMPLETE")
     print("="*60)
+
+## routing accuracy: 6/6 = 100%
