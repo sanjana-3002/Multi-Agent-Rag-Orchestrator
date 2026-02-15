@@ -199,14 +199,6 @@ SCALING:
 - Industry pattern (Microsoft Copilot, Google)"
 
 ================================================================================
-RESUME BULLET
-================================================================================
-
-"Architected multi-agent system with intelligent routing achieving 100% 
-success rate and 95% routing accuracy through GPT-3.5 classification, 
-enabling 2x capability expansion (CFO + CRO agents) at $0.0015/query cost."
-
-================================================================================
 COST TRACKING
 ================================================================================
 
