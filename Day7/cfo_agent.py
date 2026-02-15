@@ -9,6 +9,8 @@ import sys
 from pathlib import Path
 from typing import Dict
 
+from Day7 import tools
+
 # Fix the path
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -18,11 +20,9 @@ from dotenv import load_dotenv
 # CHANGE THIS LINE:
 # OLD: from Day8.tools import TOOL_REGISTRY, FinancialTools
 # NEW: Import directly since we're in same folder
-from tools import TOOL_REGISTRY, FinancialTools
+from Day7.tools import TOOL_REGISTRY, FinancialTools
 
 load_dotenv()
-
-
 
 class CFOAgent:
     """
