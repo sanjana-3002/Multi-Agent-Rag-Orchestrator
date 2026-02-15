@@ -156,7 +156,7 @@ def query_revenue(quarter: str = None, year: int = None) -> Dict:
 
 MOCK DATA vs PRODUCTION:
 
-Current (Day 8): Mock data hardcoded
+Current (Day 7): Mock data hardcoded
 - Pros: Fast to build, no database needed, cheap to test
 - Cons: Not real data, limited scenarios
 
