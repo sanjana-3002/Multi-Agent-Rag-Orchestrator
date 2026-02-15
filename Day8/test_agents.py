@@ -1,5 +1,5 @@
 """
-Day 9: Agent Testing Suite
+Day 8: Agent Testing Suite
 Test both agents and routing
 COST: ~$2 (comprehensive testing)
 """
@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from Day9.agent_router import AgentRouter
+from Day8.agent_router import AgentRouter
 
 
 def test_cfo_queries():
