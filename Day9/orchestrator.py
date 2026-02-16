@@ -26,8 +26,8 @@ def load_agent(day, filename, classname):
     spec.loader.exec_module(module)
     return getattr(module, classname)
 
-CFOAgent = load_agent("Day7", "cfo_agent", "CFOAgent")
-CROAgent = load_agent("Day8", "cro_agent", "CROAgent")
+CFOAgent = load_agent("Day8", "cfo_agent", "CFOAgent")
+CROAgent = load_agent("Day9", "cro_agent", "CROAgent")
 
 load_dotenv()
 
@@ -70,32 +70,65 @@ class MultiAgentOrchestrator:
                 "content": """Analyze the task and determine which agents are needed.
 
 Available agents:
-- CFO: Financial analysis (revenue, expenses, profit, forecasts)
-- CRO: Marketing analysis (campaigns, ROAS, CAC, channels)
+- CFO: Financial analysis (revenue, expenses, profit, margin, budget, forecasting, financial analysis)
+- CRO: Marketing analysis (campaigns, ROAS, CAC, conversions, marketing channels, ad performance)
 
-If task needs multiple agents, break it into subtasks.
+IMPORTANT for CRO tasks:
+- If asking about specific campaign, include campaign_id in the subtask
+- Available campaign IDs: FB_Q4_2024, IG_Q4_2024, GOOGLE_Q4_2024
+- If asking generally about "campaigns" or "marketing performance", be specific in subtask
+- Example good subtask: "Get performance data for FB_Q4_2024 campaign"
+- Example good subtask: "Compare Facebook, Instagram, and Google campaign performance"
+
+IMPORTANT for CFO tasks:
+- Specify quarter and year when asking about revenue (e.g., Q4 2024)
+- Be specific about what financial metric is needed
+
+Break task into clear, specific subtasks with all required parameters.
+
 Return JSON:
 {
   "needs_multiple_agents": true/false,
   "agents_needed": ["cfo", "cro"],
   "subtasks": {
-    "cfo": "specific question for CFO",
-    "cro": "specific question for CRO"
+    "cfo": "specific question for CFO with all parameters",
+    "cro": "specific question for CRO with campaign IDs if needed"
+  }
+}
+
+Examples:
+Task: "How did our campaigns perform?"
+Output: {
+  "needs_multiple_agents": false,
+  "agents_needed": ["cro"],
+  "subtasks": {
+    "cro": "Get performance summary for all campaigns: FB_Q4_2024, IG_Q4_2024, and GOOGLE_Q4_2024"
+  }
+}
+
+Task: "What was revenue and how did Facebook perform?"
+Output: {
+  "needs_multiple_agents": true,
+  "agents_needed": ["cfo", "cro"],
+  "subtasks": {
+    "cfo": "What was our Q4 2024 revenue?",
+    "cro": "Get performance data for FB_Q4_2024 campaign including ROAS and conversions"
   }
 }"""
             }, {
                 "role": "user",
                 "content": task
             }],
-            max_tokens=200,
+            max_tokens=300,
             temperature=0
         )
         
         try:
             result = json.loads(response.choices[0].message.content)
             return result
-        except:
-            # Fallback: single agent
+        except Exception as e:
+            print(f"⚠️  Error parsing decomposition: {e}")
+            # Fallback: route to CFO by default
             return {
                 "needs_multiple_agents": False,
                 "agents_needed": ["cfo"],
@@ -118,8 +151,18 @@ Return JSON:
         for agent_name, subtask in subtasks.items():
             if agent_name in self.agents:
                 print(f"\n🤖 Running {agent_name.upper()} agent...")
-                result = self.agents[agent_name].execute(subtask)
-                results[agent_name] = result
+                print(f"   Subtask: {subtask}")
+                
+                try:
+                    result = self.agents[agent_name].execute(subtask)
+                    results[agent_name] = result
+                except Exception as e:
+                    print(f"   ⚠️  Error executing {agent_name}: {e}")
+                    results[agent_name] = {
+                        "success": False,
+                        "error": str(e),
+                        "answer": f"Error: {str(e)}"
+                    }
         
         return results
     
@@ -142,6 +185,8 @@ Return JSON:
                 context += f"\n{agent_name.upper()} Agent Response:\n"
                 context += result.get("answer", "No answer provided")
                 context += "\n"
+            else:
+                context += f"\n{agent_name.upper()} Agent: Error occurred\n"
         
         # Use LLM to synthesize
         response = self.client.chat.completions.create(
@@ -152,7 +197,8 @@ Return JSON:
 
 Combine insights from multiple agents.
 Provide clear, actionable recommendations.
-Be concise but complete."""
+Be concise but complete.
+If any agent had errors, acknowledge but focus on successful results."""
             }, {
                 "role": "user",
                 "content": f"""Original question: {task}
@@ -191,6 +237,11 @@ Provide synthesized answer:"""
         print(f"Agents needed: {decomposition['agents_needed']}")
         print(f"Multiple agents: {decomposition['needs_multiple_agents']}")
         
+        if decomposition.get('subtasks'):
+            print("\nSubtasks:")
+            for agent, subtask in decomposition['subtasks'].items():
+                print(f"  {agent.upper()}: {subtask}")
+        
         # Step 2: Execute subtasks
         print("\nStep 2: Executing subtasks...")
         results = self.execute_parallel(decomposition["subtasks"])
@@ -202,7 +253,10 @@ Provide synthesized answer:"""
         else:
             # Single agent - just return its answer
             agent_name = decomposition["agents_needed"][0]
-            final_answer = results[agent_name].get("answer", "No answer")
+            if agent_name in results and results[agent_name].get("success"):
+                final_answer = results[agent_name].get("answer", "No answer")
+            else:
+                final_answer = "Error: Could not complete task"
         
         return {
             "success": True,
@@ -221,10 +275,13 @@ if __name__ == "__main__":
     
     orchestrator = MultiAgentOrchestrator()
     
-    # Test queries requiring multiple agents
+    # Test queries requiring different coordination patterns
     test_queries = [
         # Simple (single agent)
         "What was our Q4 revenue?",
+        
+        # Simple marketing
+        "How did our marketing campaigns perform?",
         
         # Complex (multiple agents)
         "What was our Q4 revenue and how did our marketing campaigns perform?",
