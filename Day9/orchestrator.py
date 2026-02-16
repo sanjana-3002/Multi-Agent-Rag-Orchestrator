@@ -26,7 +26,7 @@ def load_agent(day, filename, classname):
     spec.loader.exec_module(module)
     return getattr(module, classname)
 
-CFOAgent = load_agent("Day8", "cfo_agent", "CFOAgent")
+CFOAgent = load_agent("Day7", "cfo_agent", "CFOAgent")
 CROAgent = load_agent("Day9", "cro_agent", "CROAgent")
 
 load_dotenv()
