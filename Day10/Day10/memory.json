@@ -1,0 +1,22 @@
+{
+  "test_user": [
+    {
+      "timestamp": "2026-02-16T13:59:13.557341",
+      "query": "What was our Q4 revenue?",
+      "response": "Q4 2024 revenue was $15M, up 25% from Q3.",
+      "agent": "CFO"
+    },
+    {
+      "timestamp": "2026-02-16T13:59:13.557575",
+      "query": "How did Facebook perform?",
+      "response": "Facebook campaign had 2.0x ROAS with $250K spend.",
+      "agent": "CRO"
+    },
+    {
+      "timestamp": "2026-02-16T13:59:13.557699",
+      "query": "Can we afford to double marketing spend?",
+      "response": "Yes, with 30% profit margin we can afford $500K more.",
+      "agent": "CFO"
+    }
+  ]
+}
