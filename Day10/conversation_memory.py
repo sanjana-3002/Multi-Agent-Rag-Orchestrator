@@ -20,7 +20,7 @@ class ConversationMemory:
     3. Summary (compressed history)
     """
     
-    def __init__(self, user_id: str = "default", memory_file: str = "Day12/memory.json"):
+    def __init__(self, user_id: str = "default", memory_file: str = "Day10/memory.json"):
         self.user_id = user_id
         self.memory_file = memory_file
         
