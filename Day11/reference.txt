@@ -11,9 +11,6 @@ def generate_week2_summary():
 WEEK 2 COMPLETE: MULTI-AGENT SYSTEM
 ================================================================================
 
-WHAT WE BUILT (Days 8-14):
-================================================================================
-
 Day 8:  CFO Agent with tool use (financial analysis)
 Day 9:  CRO Agent + intelligent routing (marketing analysis)
 Day 10-11: Multi-agent orchestration (task decomposition, parallel execution)
