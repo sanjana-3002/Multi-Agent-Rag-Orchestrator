@@ -216,5 +216,13 @@
       "response": "I can help with financial analysis questions related to revenue, expenses, profit margins, and revenue forecasting. Feel free to ask any specific questions you have in mind!",
       "agent": "cfo"
     }
+  ],
+  "demo_user": [
+    {
+      "timestamp": "2026-02-16T14:20:09.072123",
+      "query": "should we invest more in marketing?",
+      "response": "Based on the financial data provided by the CFO and the performance analysis across different marketing channels by the CRO, it appears that there is room to invest more in marketing. The profit margin is healthy at 30.0%, indicating the company can afford to increase expenses. Additionally, the analysis of marketing channels shows a positive Return on Ad Spend (ROAS) of 2.0x across Facebook, Instagram, and Google.\n\nTherefore, the recommendation is to consider increasing the marketing budget, particularly focusing on optimizing conversion rates and exploring new channels for diversification. By strategically investing in these channels and potentially expanding into new ones, the company can likely drive further revenue growth and maximize the impact of its marketing efforts.",
+      "agent": "cfo, cro"
+    }
   ]
 }
