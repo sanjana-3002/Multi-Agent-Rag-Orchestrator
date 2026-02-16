@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Dict
 sys.path.append(str(Path(__file__).parent.parent))
 
-from Day12.conversation_memory import ConversationMemory
+from Day10.conversation_memory import ConversationMemory
 
 
 class ContextAwareAgent:
