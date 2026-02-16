@@ -27,7 +27,7 @@ def load_agent(day, filename, classname):
     return getattr(module, classname)
 
 CFOAgent = load_agent("Day7", "cfo_agent", "CFOAgent")
-CROAgent = load_agent("Day", "cro_agent", "CROAgent")
+CROAgent = load_agent("Day8", "cro_agent", "CROAgent")
 
 load_dotenv()
 
