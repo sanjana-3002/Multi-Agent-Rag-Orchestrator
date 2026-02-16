@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from Day1.smart_orchestrator import SmartOrchestrator
+from Day10.smart_orchestrator import SmartOrchestrator
 
 
 def run_demo():
