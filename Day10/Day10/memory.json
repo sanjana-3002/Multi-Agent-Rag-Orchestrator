@@ -62,5 +62,65 @@
       "response": "Based on the performance data provided for the Facebook and Instagram campaigns in Q4 2024, both platforms have shown positive results with a Return on Ad Spend (ROAS) of 2.0x and competitive Conversion Rates around 2.5% to 2.7%. The Facebook campaign had higher impressions and clicks compared to Instagram, but both generated similar revenue.\n\nConsidering the revenue breakdown for Q4 2024, with a total revenue of $15,000,000 and a 25% growth compared to the previous period, it indicates a positive trend for the company.\n\nRecommendations:\n1. Both platforms have shown effectiveness in generating revenue, so consider maintaining investments in both Facebook and Instagram campaigns.\n2. Focus on optimizing the Facebook campaign to increase impressions and clicks further to maximize its potential.\n3. Explore opportunities to scale both campaigns based on the positive ROAS and Conversion Rates.\n4. Continuously monitor and analyze the performance metrics to make data-driven decisions for future marketing strategies.\n\nOverall, a balanced approach of investing in both Facebook and Instagram while optimizing and scaling based on performance insights would be beneficial for maximizing the company's digital marketing efforts.",
       "agent": "cfo, cro"
     }
+  ],
+  "test_user_persist": [
+    {
+      "timestamp": "2026-02-16T14:04:24.636312",
+      "query": "What was Q4 revenue?",
+      "response": "The Q4 revenue for the specified year was $15,000,000. Here is the breakdown:\n- Product Sales: $10,000,000\n- Services: $3,000,000\n- Subscriptions: $2,000,000\n\nThe revenue experienced a growth of 25% compared to the previous quarter.",
+      "agent": "cfo"
+    }
+  ],
+  "test_follow_up": [
+    {
+      "timestamp": "2026-02-16T14:04:31.371677",
+      "query": "How did our Facebook campaign perform?",
+      "response": "### Performance Data for FB_Q4_2024 Campaign:\n\n- **Platform:** Facebook\n- **Spend:** $250,000\n- **Impressions:** 5,000,000\n- **Clicks:** 100,000\n- **Conversions:** 2,500\n- **Revenue:** $500,000\n- **CTR (Click-Through Rate):** 2.00%\n- **CVR (Conversion Rate):** 2.50%\n- **ROAS (Return on Ad Spend):** 2.0x\n- **CPA (Cost Per Acquisition):** $100.00\n\n### Analysis and Recommendations:\n1. **ROAS (Return on Ad Spend):**\n   - With an ROAS of 2.0x, for every dollar spent on this Facebook campaign, you generated $2.00 in revenue. This indicates a decent return, but there is room for improvement.\n   - To optimize ROAS, consider focusing on high-converting audience segments and enhancing ad creatives to increase engagement and conversions.\n\n2. **CPA (Cost Per Acquisition):**\n   - The Cost Per Acquisition is $100.00. Lowering the CPA can improve campaign efficiency and profitability.\n   - You can reduce CPA by refining targeting to reach a more relevant audience, improving ad messaging to increase conversion rates, and optimizing bid strategies.\n\n3. **Conversion Rate (CVR):**\n   - The Conversion Rate of 2.50% is a good indicator of campaign effectiveness in converting clicks to actions.\n   - To boost CVR further, test different landing page designs, introduce limited-time offers, and ensure a seamless user journey from ad click to conversion.\n\n4. **Budget Allocation:**\n   - Evaluate the performance of other marketing channels to compare ROI and consider reallocating budget to channels with higher ROAS or scaling successful campaigns.\n\n5. **Continual Optimization:**\n   - Regularly monitor campaign performance, A/B test creatives and targeting options, and leverage data insights to refine strategies and maximize ROI.\n\nBy focusing on these recommendations and optimizing your Facebook campaign further, you can drive better results and improve the overall return on your advertising investment.",
+      "agent": "cro"
+    },
+    {
+      "timestamp": "2026-02-16T14:04:37.106862",
+      "query": "What about Instagram?",
+      "response": "### Performance Data for IG_Q4_2024 Campaign:\n\n- **Platform:** Instagram\n- **Spend:** $200,000\n- **Impressions:** 3,000,000\n- **Clicks:** 75,000\n- **Conversions:** 2,000\n- **Revenue:** $400,000\n- **CTR (Click-Through Rate):** 2.50%\n- **CVR (Conversion Rate):** 2.67%\n- **ROAS (Return on Ad Spend):** 2.0x\n- **CPA (Cost per Acquisition):** $100.00\n\n### Analysis and Recommendations:\n\n1. **ROAS (Return on Ad Spend):** With an ROAS of 2.0x, the campaign is generating $2 in revenue for every $1 spent. This indicates a positive return, but there's room for improvement.\n\n2. **CPA (Cost per Acquisition):** The CPA is $100.00, meaning it costs $100 to acquire a customer. To optimize this, focus on targeting high-converting audiences or refining ad creatives to increase conversion rates.\n\n3. **CTR and CVR:** Although the CTR is decent at 2.50%, the CVR can be further improved to capitalize on the clicks generated. Enhance the landing page experience and optimize the conversion funnel for better results.\n\n4. **Revenue Optimization:** To scale revenue further, consider increasing the budget for this campaign while maintaining or improving the current ROI metrics.\n\n5. **Audience Segmentation:** Explore segmenting the audience based on demographics, interests, or behaviors to deliver more personalized campaigns and drive higher conversions.\n\n6. **Monitoring and Iteration:** Continuously monitor campaign performance metrics and adjust targeting, messaging, and budget allocation based on real-time data insights to maximize ROI.\n\nOverall, focus on refining targeting, improving conversion rates, and strategic budget allocation to optimize the IG_Q4_2024 campaign's performance and drive sustainable revenue growth.",
+      "agent": "cro"
+    }
+  ],
+  "test_context": [
+    {
+      "timestamp": "2026-02-16T14:04:40.792336",
+      "query": "What was Q4 revenue?",
+      "response": "The revenue for Q4 2024 was $15,000,000. The breakdown of revenue sources is as follows:\n- Product Sales: $10,000,000\n- Services: $3,000,000\n- Subscriptions: $2,000,000\n\nAdditionally, there was a 25% growth compared to the previous quarter.",
+      "agent": "cfo"
+    },
+    {
+      "timestamp": "2026-02-16T14:04:43.967628",
+      "query": "What were expenses?",
+      "response": "The total expenses for Q4 2024 were $10,500,000. Here is the breakdown by category:\n- Marketing: $2,500,000\n- Operations: $1,500,000\n- Payroll: $4,000,000\n- R&D: $2,000,000\n- Other: $500,000",
+      "agent": "cfo"
+    },
+    {
+      "timestamp": "2026-02-16T14:04:47.550161",
+      "query": "Calculate profit margin",
+      "response": "Based on the information provided, the profit margin for Q4 2024 was calculated to be 30%. This indicates that for every dollar of revenue generated, the company retained 30 cents as profit after covering all expenses. To improve profitability, the company could focus on increasing revenue, reducing expenses, or a combination of both. Monitoring and optimizing the profit margin is crucial for sustainable growth and financial health.",
+      "agent": "cfo"
+    },
+    {
+      "timestamp": "2026-02-16T14:04:54.310337",
+      "query": "How did campaigns perform?",
+      "response": "### Performance Summary for Campaigns: FB_Q4_2024, IG_Q4_2024, and GOOGLE_Q4_2024\n\n#### Facebook Campaign (FB_Q4_2024):\n- Total Spend: $250,000\n- Impressions: 5,000,000\n- Clicks: 100,000\n- Conversions: 2500\n- Revenue: $500,000\n- CTR: 2.00%\n- CVR: 2.50%\n- ROAS: 2.0x\n- CPA: $100.00\n\n#### Instagram Campaign (IG_Q4_2024):\n- Total Spend: $200,000\n- Impressions: 3,000,000\n- Clicks: 75,000\n- Conversions: 2000\n- Revenue: $400,000\n- CTR: 2.50%\n- CVR: 2.67%\n- ROAS: 2.0x\n- CPA: $100.00\n\n#### Google Ads Campaign (GOOGLE_Q4_2024):\n- Total Spend: $300,000\n- Impressions: 8,000,000\n- Clicks: 120,000\n- Conversions: 3000\n- Revenue: $600,000\n- CTR: 1.50%\n- CVR: 2.50%\n- ROAS: 2.0x\n- CPA: $100.00\n\n### Analysis and Recommendations:\n1. **Return on Ad Spend (ROAS):** All campaigns have a consistent ROAS of 2.0x. This indicates that for every dollar spent on advertising, $2 in revenue is generated.\n   \n2. **Cost Per Acquisition (CPA):** The CPA is $100 across all campaigns, showing a consistent cost to acquire a customer.\n   \n3. **Conversion Rates (CVR):** Instagram has the highest CVR at 2.67%, indicating better conversion efficiency. Consider optimizing other channels to improve CVR.\n   \n4. **Click-Through Rates (CTR):** Instagram has the highest CTR at 2.50%, indicating better engagement. Check if similar strategies can be applied to other campaigns for improved CTR.\n\nOverall, these campaigns are performing well with a balanced ROAS and CPA. Focus on optimizing conversion rates and click-through rates for better overall performance.",
+      "agent": "cro"
+    },
+    {
+      "timestamp": "2026-02-16T14:04:58.712601",
+      "query": "What's our CAC?",
+      "response": "Here are the Customer Acquisition Costs (CAC) for each channel:\n- Facebook: $100.00\n- Instagram: $100.00\n- Google: $100.00\n\nAll channels have the same CAC of $100.00.\n\nIf you have any specific questions or need further analysis on CAC, feel free to ask!",
+      "agent": "cro"
+    },
+    {
+      "timestamp": "2026-02-16T14:05:10.085192",
+      "query": "Should we invest more in marketing?",
+      "response": "Based on the financial analysis, the profit margin for Q4 2024 is at 30.0%. To determine if investing more in marketing is advisable, consider the potential increase in revenue against additional expenses. Ensure the return on investment (ROI) from increased marketing activities is positive and contributes to a higher profit margin. \n\nReviewing campaign performance data, all channels have a healthy ROAS of 2.0x. Instagram stands out with the highest CVR at 2.67%, suggesting optimization opportunities for other channels. Google Ads leads in conversions, indicating its effectiveness. Consider reallocating budget from Facebook to Google Ads or Instagram for better results. Continuously optimize campaigns to improve CTR and reduce CAC for improved ROI. If you have specific plans for increased marketing investment, forecast potential revenue impact and profitability with the new strategy.",
+      "agent": "cfo, cro"
+    }
   ]
 }
