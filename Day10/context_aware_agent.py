@@ -103,7 +103,7 @@ if __name__ == "__main__":
         spec.loader.exec_module(module)
         return getattr(module, classname)
     
-    CFOAgent = load_agent("Day8", "cfo_agent", "CFOAgent")
+    CFOAgent = load_agent("Day7", "cfo_agent", "CFOAgent")
     
     # Wrap agent with context awareness
     cfo = CFOAgent()
