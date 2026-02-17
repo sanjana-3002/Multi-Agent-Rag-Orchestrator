@@ -13,7 +13,7 @@ from pathlib import Path
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from Day12.smart_orchestrator import SmartOrchestrator
+from Day10.smart_orchestrator import SmartOrchestrator
 
 app = FastAPI(
     title="CampaignBrain API",
