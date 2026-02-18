@@ -1,0 +1,10 @@
+{
+  "demo_user": [
+    {
+      "timestamp": "2026-02-17T20:17:40.079192",
+      "query": "What was our Q4 revenue?",
+      "response": "The revenue for Q4 2024 was $15,000,000. It consisted of:\n- Product sales: $10,000,000\n- Services: $3,000,000\n- Subscriptions: $2,000,000\n\nAdditionally, there was a 25% growth in revenue compared to the previous quarter.",
+      "agent": "cfo"
+    }
+  ]
+}
