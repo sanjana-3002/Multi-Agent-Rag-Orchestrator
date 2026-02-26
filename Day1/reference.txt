@@ -1,4 +1,4 @@
-# Day 1: Embeddings & Semantic Search
+ # Day 1: Embeddings & Semantic Search
 
 ## What I Learned
 
