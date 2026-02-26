@@ -46,3 +46,14 @@ virtualenv/
 
 # Project specific
 requirements-locked.txt
+# dependencies
+node_modules/
+frontend/node_modules/
+
+# next
+frontend/.next/
+.next/
+
+# misc
+.DS_Store
+.env
