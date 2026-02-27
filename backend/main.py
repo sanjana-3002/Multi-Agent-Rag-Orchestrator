@@ -9,6 +9,31 @@ from pydantic import BaseModel
 from typing import List, Dict, Optional
 import sys
 from pathlib import Path
+# At the top, add imports
+from backend.tools import get_company_financials, get_company_news
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Add a new endpoint to showcase real data
+@app.get("/demo/company/{ticker}")
+async def demo_company(ticker: str):
+    """
+    Demo endpoint showing real data integration
+    """
+    try:
+        financial = get_company_financials(ticker)
+        news = get_company_news(ticker)
+        
+        return {
+            "ticker": ticker,
+            "financial_data": financial,
+            "news_data": news,
+            "powered_by": "Real-time APIs"
+        }
+    except Exception as e:
+        return {"error": str(e)}
 
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent))
