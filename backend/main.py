@@ -36,21 +36,21 @@ except ImportError as e:
             
             if "revenue" in q or "q4" in q:
                 return {
-                    "answer": "Q4 2024 revenue was $15,000,000, representing 25% growth vs Q3. Breakdown: Product Sales ($10M), Services ($3M), Subscriptions ($2M). Strong performance across all segments.",
+                    "answer": "Q4 2025 revenue was $15,000,000, representing 25% growth vs Q3. Breakdown: Product Sales ($10M), Services ($3M), Subscriptions ($2M). Strong performance across all segments.",
                     "agents_used": ["cfo"],
                     "execution_time": 0.5,
                     "needs_coordination": False
                 }
             elif "facebook" in q or "fb" in q:
                 return {
-                    "answer": "Facebook Campaign Q4 2024: Spend $250,000, Revenue $500,000, ROAS 2.0x, Conversions 2,500, CPA $100. Performance exceeded benchmarks with strong engagement.",
+                    "answer": "Facebook Campaign Q4 2025: Spend $250,000, Revenue $500,000, ROAS 2.0x, Conversions 2,500, CPA $100. Performance exceeded benchmarks with strong engagement.",
                     "agents_used": ["cro"],
                     "execution_time": 0.4,
                     "needs_coordination": False
                 }
             elif "instagram" in q or "ig" in q:
                 return {
-                    "answer": "Instagram Campaign Q4 2024: Spend $200,000, Revenue $400,000, ROAS 2.0x, Conversions 2,000, CPA $100. Solid performance with room for optimization.",
+                    "answer": "Instagram Campaign Q4 2025: Spend $200,000, Revenue $400,000, ROAS 2.0x, Conversions 2,000, CPA $100. Solid performance with room for optimization.",
                     "agents_used": ["cro"],
                     "execution_time": 0.4,
                     "needs_coordination": False
