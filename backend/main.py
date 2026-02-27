@@ -7,55 +7,42 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Optional
-import sys
-from pathlib import Path
-# At the top, add imports
-from backend.tools import get_company_financials, get_company_news
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Add a new endpoint to showcase real data
-@app.get("/demo/company/{ticker}")
-async def demo_company(ticker: str):
-    """
-    Demo endpoint showing real data integration
-    """
-    try:
-        financial = get_company_financials(ticker)
-        news = get_company_news(ticker)
+# Import from local backend folder (not Day10)
+try:
+    from smart_orchestrator import SmartOrchestrator
+except ImportError:
+    # Fallback: create a simple mock orchestrator
+    class SmartOrchestrator:
+        def __init__(self, user_id="demo"):
+            self.user_id = user_id
         
-        return {
-            "ticker": ticker,
-            "financial_data": financial,
-            "news_data": news,
-            "powered_by": "Real-time APIs"
-        }
-    except Exception as e:
-        return {"error": str(e)}
-
-# Add project root to path
-sys.path.append(str(Path(__file__).parent.parent))
-
-from Day10.smart_orchestrator import SmartOrchestrator
+        def execute(self, query):
+            return {
+                "answer": f"Received query: {query}. Backend is running!",
+                "agents_used": ["demo"],
+                "needs_coordination": False
+            }
 
 app = FastAPI(
     title="CampaignBrain API",
-    description="Multi-Agent AI System for Marketing Agencies",
+    description="Multi-Agent AI System",
     version="1.0.0"
 )
 
-# CORS - allow frontend to call API
+# CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production: specific domains only
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# In-memory storage (in production: use Redis/PostgreSQL)
 orchestrators = {}
 
 
@@ -71,34 +58,45 @@ class QueryResponse(BaseModel):
     needs_coordination: bool
 
 
-class HistoryResponse(BaseModel):
-    interactions: List[Dict]
-    total: int
-
-
 @app.get("/")
 async def root():
     """Health check"""
     return {
         "status": "healthy",
         "service": "CampaignBrain API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "environment": "production"
     }
+
+
+@app.get("/demo/company/{ticker}")
+async def demo_company(ticker: str):
+    """Demo endpoint with real data"""
+    try:
+        from tools.financial_data import get_company_financials
+        from tools.news_data import get_company_news
+        
+        financial = get_company_financials(ticker)
+        news = get_company_news(ticker)
+        
+        return {
+            "ticker": ticker,
+            "financial_data": financial,
+            "news_data": news,
+            "powered_by": "Real-time APIs"
+        }
+    except Exception as e:
+        return {
+            "ticker": ticker,
+            "error": str(e),
+            "note": "Make sure API keys are set in environment variables"
+        }
 
 
 @app.post("/query", response_model=QueryResponse)
 async def process_query(request: QueryRequest):
-    """
-    Process user query through multi-agent system
+    """Process query through multi-agent system"""
     
-    Args:
-        request: QueryRequest with query and user_id
-    
-    Returns:
-        QueryResponse with answer and metadata
-    """
-    
-    # Get or create orchestrator for user
     if request.user_id not in orchestrators:
         orchestrators[request.user_id] = SmartOrchestrator(user_id=request.user_id)
     
@@ -108,9 +106,7 @@ async def process_query(request: QueryRequest):
         import time
         start = time.time()
         
-        # Execute query
         result = orchestrator.execute(request.query)
-        
         execution_time = time.time() - start
         
         return QueryResponse(
@@ -122,53 +118,6 @@ async def process_query(request: QueryRequest):
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.get("/history/{user_id}", response_model=HistoryResponse)
-async def get_history(user_id: str, limit: int = 10):
-    """
-    Get conversation history for user
-    
-    Args:
-        user_id: User identifier
-        limit: Max number of interactions to return
-    
-    Returns:
-        HistoryResponse with recent interactions
-    """
-    
-    if user_id not in orchestrators:
-        return HistoryResponse(interactions=[], total=0)
-    
-    orchestrator = orchestrators[user_id]
-    history = orchestrator.memory.get_recent_history(limit)
-    
-    return HistoryResponse(
-        interactions=history,
-        total=len(orchestrator.memory.long_term)
-    )
-
-
-@app.get("/stats/{user_id}")
-async def get_stats(user_id: str):
-    """Get memory statistics for user"""
-    
-    if user_id not in orchestrators:
-        return {"error": "User not found"}
-    
-    orchestrator = orchestrators[user_id]
-    return orchestrator.memory.get_stats()
-
-
-@app.delete("/history/{user_id}")
-async def clear_history(user_id: str):
-    """Clear conversation history for user"""
-    
-    if user_id in orchestrators:
-        orchestrators[user_id].memory.clear_all()
-        return {"status": "cleared"}
-    
-    return {"status": "no history to clear"}
 
 
 if __name__ == "__main__":
