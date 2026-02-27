@@ -25,7 +25,7 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const API_URL = 'https://aware-trust-production-734d.up.railway.app';
       
       console.log('🔗 Connecting to:', API_URL); // Debug log
       
