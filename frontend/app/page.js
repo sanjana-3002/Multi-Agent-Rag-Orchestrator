@@ -25,7 +25,8 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:8000/query', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/query`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query, user_id: 'demo' })
