@@ -26,12 +26,21 @@ export default function Home() {
 
     try {
       const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      
+      console.log('🔗 Connecting to:', API_URL); // Debug log
+      
       const response = await fetch(`${API_URL}/query`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query, user_id: 'demo' })
       });
-      const data = await res.json();
+
+      if (!response.ok) {
+        throw new Error(`Backend returned ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json(); // ✅ FIXED - was "res.json()"
+      
       setMessages(prev => [...prev, { 
         role: 'assistant', 
         content: data.answer, 
@@ -39,9 +48,10 @@ export default function Home() {
         time: data.execution_time
       }]);
     } catch (err) {
+      console.error('❌ Error:', err);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: '❌ Error: Backend not responding. Make sure it\'s running on port 8000.',
+        content: `❌ Error: ${err.message}\n\nBackend URL: ${process.env.NEXT_PUBLIC_API_URL || 'Not Set'}\n\nMake sure NEXT_PUBLIC_API_URL environment variable is set in Vercel.`,
         error: true
       }]);
     }
