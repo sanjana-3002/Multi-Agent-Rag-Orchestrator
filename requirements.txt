@@ -1,6 +1,9 @@
-openai==1.30.0
+# Core
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
 python-dotenv==1.0.0
-yfinance==0.2.36
-praw==7.7.1
+openai==1.30.0
+
+# Real Data (NO REDDIT)
 requests==2.31.0
 beautifulsoup4==4.12.2
