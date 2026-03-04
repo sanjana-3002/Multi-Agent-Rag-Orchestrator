@@ -47,6 +47,25 @@ const TECH = [
   { name: 'Railway + Vercel',       cat: 'Deployment',       cls: 'text-pink-400    border-pink-400/30    bg-pink-400/5'     },
 ];
 
+// ── Scroll-reveal hook ─────────────────────────────────────────
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function useInView(threshold = 0.12): [React.RefObject<any>, boolean] {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ref = useRef<any>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, visible];
+}
+
 // ── Component ──────────────────────────────────────────────────
 export default function Home() {
   const [view, setView]       = useState<'landing' | 'demo'>('landing');
@@ -54,6 +73,13 @@ export default function Home() {
   const [input, setInput]     = useState('');
   const [loading, setLoading] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
+
+  // Scroll-reveal refs
+  const [statsRef,  statsVisible]  = useInView(0.25);
+  const [pipeRef,   pipeVisible]   = useInView(0.06);
+  const [agentsRef, agentsVisible] = useInView(0.06);
+  const [techRef,   techVisible]   = useInView(0.1);
+  const [ctaRef,    ctaVisible]    = useInView(0.2);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -342,16 +368,18 @@ export default function Home() {
           </a>
         </div>
 
-        {/* Stats grid */}
+        {/* Stats grid — scroll-reveal */}
         <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto animate-fade-up"
-          style={{ animationDelay: '0.4s' }}
+          ref={statsRef}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
         >
           {STATS.map((s, i) => (
             <div
               key={s.label}
-              className="group bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5 hover:border-indigo-500/35 hover:bg-white/[0.06] transition-all duration-300"
-              style={{ animationDelay: `${0.4 + i * 0.05}s` }}
+              className={`group bg-white/[0.04] border border-white/[0.08] rounded-2xl p-5 hover:border-indigo-500/35 hover:bg-white/[0.06] transition-all duration-700 ease-out ${
+                statsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: statsVisible ? `${i * 100}ms` : '0ms' }}
             >
               <div className="text-3xl font-bold text-white mb-1 group-hover:text-indigo-300 transition-colors">{s.value}</div>
               <div className="text-xs text-slate-400 leading-snug">{s.label}</div>
@@ -361,8 +389,8 @@ export default function Home() {
       </section>
 
       {/* ── Pipeline Architecture ── */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-20">
-        <div className="text-center mb-14">
+      <section ref={pipeRef} className="relative z-10 max-w-6xl mx-auto px-6 py-20">
+        <div className={`text-center mb-14 transition-all duration-700 ease-out ${pipeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-indigo-400 mb-3">Architecture</div>
           <h2 className="text-3xl md:text-4xl font-bold">Two-Pipeline Design</h2>
           <p className="text-slate-400 mt-3 max-w-lg mx-auto leading-relaxed text-[15px]">
@@ -371,16 +399,22 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="relative rounded-3xl border border-white/[0.08] bg-white/[0.02] p-8 overflow-hidden">
+        <div className={`relative rounded-3xl border border-white/[0.08] bg-white/[0.02] p-8 overflow-hidden transition-all duration-700 ease-out ${pipeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+          style={{ transitionDelay: pipeVisible ? '150ms' : '0ms' }}
+        >
           {/* Subtle dot grid */}
           <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
 
           {/* Flow steps */}
           <div className="relative flex flex-col md:flex-row items-stretch gap-2 md:gap-0">
             {PIPELINE.map((step, i) => (
-              <div key={step.label} className="flex md:flex-1 items-center w-full">
+              <div
+                key={step.label}
+                className={`flex md:flex-1 items-center w-full transition-all duration-700 ease-out ${pipeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                style={{ transitionDelay: pipeVisible ? `${250 + i * 110}ms` : '0ms' }}
+              >
                 {/* Card */}
-                <div className="flex-1 relative overflow-hidden rounded-2xl border border-white/[0.08] hover:border-white/20 transition-all duration-300 cursor-default group">
+                <div className={`flex-1 relative overflow-hidden rounded-2xl border border-white/[0.08] hover:border-white/20 transition-all duration-300 cursor-default group`}>
                   <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${step.g}`} />
                   <div className="p-5 text-center">
                     <div className="text-2xl mb-2">{step.icon}</div>
@@ -407,8 +441,12 @@ export default function Home() {
               { icon: '🧠', title: 'Semantic Search',  desc: 'text-embedding-3-small + Qdrant cosine similarity for concept-level retrieval' },
               { icon: '🔤', title: 'Keyword Search',   desc: 'BM25 sparse retrieval for exact term matching and high-recall search' },
               { icon: '💾', title: 'Agent Memory',     desc: 'Per-user conversation history enabling coherent multi-turn interactions' },
-            ].map(d => (
-              <div key={d.title} className="bg-white/[0.03] rounded-xl p-4 border border-white/[0.07]">
+            ].map((d, i) => (
+              <div
+                key={d.title}
+                className={`bg-white/[0.03] rounded-xl p-4 border border-white/[0.07] transition-all duration-700 ease-out ${pipeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                style={{ transitionDelay: pipeVisible ? `${850 + i * 110}ms` : '0ms' }}
+              >
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className="text-base">{d.icon}</span>
                   <span className="text-[13px] font-semibold text-white">{d.title}</span>
@@ -421,16 +459,19 @@ export default function Home() {
       </section>
 
       {/* ── Specialist Agents ── */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-12">
-        <div className="text-center mb-14">
+      <section ref={agentsRef} className="relative z-10 max-w-6xl mx-auto px-6 py-12">
+        <div className={`text-center mb-14 transition-all duration-700 ease-out ${agentsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-indigo-400 mb-3">Specialist Agents</div>
           <h2 className="text-3xl md:text-4xl font-bold">Domain Experts, Powered by GPT-4</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
 
-          {/* CFO Agent */}
-          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] hover:border-blue-500/30 transition-all duration-300 bg-gradient-to-br from-blue-500/[0.05] via-transparent to-transparent">
+          {/* CFO Agent — slides in from the left */}
+          <div
+            className={`relative overflow-hidden rounded-3xl border border-white/[0.08] hover:border-blue-500/30 transition-all duration-700 ease-out bg-gradient-to-br from-blue-500/[0.05] via-transparent to-transparent ${agentsVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
+            style={{ transitionDelay: agentsVisible ? '150ms' : '0ms' }}
+          >
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/60 to-transparent" />
             <div className="p-8">
               <div className="flex items-center gap-4 mb-6">
@@ -470,8 +511,11 @@ export default function Home() {
             </div>
           </div>
 
-          {/* CRO Agent */}
-          <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] hover:border-purple-500/30 transition-all duration-300 bg-gradient-to-br from-purple-500/[0.05] via-transparent to-transparent">
+          {/* CRO Agent — slides in from the right */}
+          <div
+            className={`relative overflow-hidden rounded-3xl border border-white/[0.08] hover:border-purple-500/30 transition-all duration-700 ease-out bg-gradient-to-br from-purple-500/[0.05] via-transparent to-transparent ${agentsVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
+            style={{ transitionDelay: agentsVisible ? '300ms' : '0ms' }}
+          >
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/60 to-transparent" />
             <div className="p-8">
               <div className="flex items-center gap-4 mb-6">
@@ -514,16 +558,17 @@ export default function Home() {
       </section>
 
       {/* ── Tech Stack ── */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 py-16">
-        <div className="text-center mb-10">
+      <section ref={techRef} className="relative z-10 max-w-6xl mx-auto px-6 py-16">
+        <div className={`text-center mb-10 transition-all duration-700 ease-out ${techVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-indigo-400 mb-3">Built With</div>
           <h2 className="text-3xl font-bold">Production-Grade Stack</h2>
         </div>
         <div className="flex flex-wrap gap-3 justify-center">
-          {TECH.map(t => (
+          {TECH.map((t, i) => (
             <div
               key={t.name}
-              className={`px-4 py-2.5 rounded-xl border text-[13px] font-medium flex flex-col items-center gap-0.5 hover:scale-105 transition-transform cursor-default ${t.cls}`}
+              className={`px-4 py-2.5 rounded-xl border text-[13px] font-medium flex flex-col items-center gap-0.5 cursor-default transition-all duration-500 ease-out hover:scale-105 ${t.cls} ${techVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-4'}`}
+              style={{ transitionDelay: techVisible ? `${i * 65}ms` : '0ms' }}
             >
               <span>{t.name}</span>
               <span className="text-[10px] opacity-50">{t.cat}</span>
@@ -533,8 +578,8 @@ export default function Home() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative z-10 max-w-6xl mx-auto px-6 pb-24">
-        <div className="relative overflow-hidden rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-indigo-600/[0.14] to-violet-600/[0.07] p-14 text-center">
+      <section ref={ctaRef} className="relative z-10 max-w-6xl mx-auto px-6 pb-24">
+        <div className={`relative overflow-hidden rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-indigo-600/[0.14] to-violet-600/[0.07] p-14 text-center transition-all duration-700 ease-out ${ctaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/60 to-transparent" />
           <div className="absolute inset-0 [background-image:radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.12),transparent_65%)] pointer-events-none" />
           <h2 className="text-3xl md:text-4xl font-bold mb-4 relative">See it in action</h2>
