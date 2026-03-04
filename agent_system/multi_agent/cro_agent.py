@@ -30,7 +30,7 @@ class CROAgent:
     def __init__(self, model: str = "gpt-3.5-turbo"):
         self.client = OpenAI()
         self.model = model
-        
+
         # Marketing tools
         self.tools = [
             {
@@ -228,61 +228,61 @@ Always be data-driven and provide specific recommendations."""
                 "content": task
             }
         ]
-        
+
         execution_trace = []
-        
+
         for iteration in range(max_iterations):
             print(f"--- Iteration {iteration + 1} ---")
-            
+
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
                 tools=self.tools,
                 tool_choice="auto"
             )
-            
+
             assistant_message = response.choices[0].message
-            
+
             if not assistant_message.tool_calls:
                 final_answer = assistant_message.content
                 print(f"\n✅ Task complete!")
                 print(f"Answer: {final_answer[:200]}...")
-                
+
                 return {
                     "success": True,
                     "answer": final_answer,
                     "iterations": iteration + 1,
                     "trace": execution_trace
                 }
-            
+
             messages.append(assistant_message)
-            
+
             for tool_call in assistant_message.tool_calls:
                 function_name = tool_call.function.name
                 function_args = json.loads(tool_call.function.arguments)
-                
+
                 print(f"\n🔧 Calling tool: {function_name}")
                 print(f"   Arguments: {function_args}")
-                
+
                 if function_name in self.tool_registry:
                     result = self.tool_registry[function_name](**function_args)
                     result_str = json.dumps(result)
-                    
+
                     print(f"   Result: {result_str[:100]}...")
-                    
+
                     messages.append({
                         "role": "tool",
                         "tool_call_id": tool_call.id,
                         "name": function_name,
                         "content": result_str
                     })
-                    
+
                     execution_trace.append({
                         "tool": function_name,
                         "args": function_args,
                         "result": result
                     })
-        
+
         return {
             "success": False,
             "error": "Max iterations reached",

@@ -32,7 +32,7 @@ class QueryOptimizer:
         """
         
         response = self.client.chat.completions.create(
-            model="gpt-3.5-turbo",  # Cheap model for this task
+            model="gpt-3.5-turbo",
             messages=[{
                 "role": "system",
                 "content": "Add 2-3 related marketing/business terms to the query. Return only the expanded query."
@@ -43,7 +43,7 @@ class QueryOptimizer:
             max_tokens=50,
             temperature=0.3
         )
-        
+
         return response.choices[0].message.content.strip()
     
     def rewrite_query(self, query):
@@ -67,7 +67,7 @@ class QueryOptimizer:
             max_tokens=50,
             temperature=0.3
         )
-        
+
         return response.choices[0].message.content.strip()
     
     def generate_multi_queries(self, query, n=3):
@@ -95,7 +95,7 @@ class QueryOptimizer:
             max_tokens=150,
             temperature=0.7
         )
-        
+
         # Parse response into list
         text = response.choices[0].message.content
         queries = []
